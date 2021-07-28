@@ -52,11 +52,11 @@ RSpec.describe 'Games API', type: :request do
         cover: 'https://lol.com/league-of-legends-1.jpg'
       }
     end
-    before { post '/games', params: :valid_attributes }
+    before { post '/games', params: valid_attributes }
 
     context 'when the request is valid' do
       it 'creates a game' do
-        excpect(json['title']).to eq('League of Legends')
+        expect(json['title']).to eq('League of Legends')
       end
 
       it 'returns code status 201' do
