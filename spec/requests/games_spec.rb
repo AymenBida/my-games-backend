@@ -43,4 +43,37 @@ RSpec.describe 'Games API', type: :request do
       end
     end
   end
+
+  describe 'POST /games' do
+    let(:valid_attributes) do
+      {
+        title: 'League of Legends',
+        year: '2009',
+        cover: 'https://lol.com/league-of-legends-1.jpg'
+      }
+    end
+    before { post '/games', params: :valid_attributes }
+
+    context 'when the request is valid' do
+      it 'creates a game' do
+        excpect(json['title']).to eq('League of Legends')
+      end
+
+      it 'returns code status 201' do
+        expect(response).to have_http_status(201)
+      end
+    end
+
+    context 'when the request is invalid' do
+      before { post '/games', params: { year: '2000' } }
+
+      it 'returns code status 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body).to match(/Validation failed: Title can't be blank/)
+      end
+    end
+  end
 end
