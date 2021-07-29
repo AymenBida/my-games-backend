@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :games, only: [:index, :show, :create, :update, :destroy]
   post '/signup', to: 'users#create'
   post '/login', to: 'authentication#authenticate'
+  post '/favourites', to: 'favourites#create'
 end
