@@ -92,5 +92,39 @@ RSpec.describe 'Games API', type: :request do
         expect(response).to have_http_status(204)
       end
     end
+
+    context 'when the record does not exist' do
+      let(:game_id) { 99 }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+
+      it 'returns a not found message' do
+        expect(response.body).to match(/Couldn't find Game/)
+      end
+    end
+  end
+
+  describe 'DELETE /games/:id' do
+    before { delete "/games/#{game_id}" }
+
+    context 'when the record exists' do
+      it 'returns code status 204' do
+        expect(response).to have_http_status(204)
+      end
+    end
+
+    context 'when the record does not exist' do
+      let(:game_id) { 99 }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+
+      it 'returns a not found message' do
+        expect(response.body).to match(/Couldn't find Game/)
+      end
+    end
   end
 end

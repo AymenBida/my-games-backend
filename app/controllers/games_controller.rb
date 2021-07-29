@@ -20,6 +20,11 @@ class GamesController < ApplicationController
     head :no_content
   end
 
+  def destroy
+    @game.destroy
+    head :no_content
+  end
+
   private
 
   def find_game
