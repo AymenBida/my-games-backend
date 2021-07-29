@@ -52,6 +52,7 @@ RSpec.describe 'Games API', type: :request do
         cover: 'https://lol.com/league-of-legends-1.jpg'
       }
     end
+
     before { post '/games', params: valid_attributes }
 
     context 'when the request is valid' do
@@ -73,6 +74,22 @@ RSpec.describe 'Games API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body).to match(/Validation failed: Title can't be blank/)
+      end
+    end
+  end
+
+  describe 'PUT /games/:id' do
+    let(:valid_attributes) { { title: 'World of Warcraft' } }
+
+    before { put "/games/#{game_id}", params: valid_attributes }
+
+    context 'when the record exists' do
+      it 'updates the record' do
+        expect(response.body).to be_empty
+      end
+
+      it 'returns code status 204' do
+        expect(response).to have_http_status(204)
       end
     end
   end
