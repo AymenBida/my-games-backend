@@ -1,6 +1,8 @@
 class GamesController < ApplicationController
   before_action :find_game, only: %i[show update destroy]
 
+  skip_before_action :authorize_request, only: %i[index show]
+
   def index
     @games = Game.all
     json_response(@games)

@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Games API', type: :request do
   let!(:games) { create_list(:game, 10) }
+  let(:user) { create(:user) }
   let(:game_id) { games.first.id }
+  let(:headers) { valid_headers }
 
   describe 'GET /games' do
     before { get '/games' }
@@ -50,10 +52,10 @@ RSpec.describe 'Games API', type: :request do
         title: 'League of Legends',
         year: '2009',
         cover: 'https://lol.com/league-of-legends-1.jpg'
-      }
+      }.to_json
     end
 
-    before { post '/games', params: valid_attributes }
+    before { post '/games', params: valid_attributes, headers: headers }
 
     context 'when the request is valid' do
       it 'creates a game' do
@@ -66,7 +68,7 @@ RSpec.describe 'Games API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/games', params: { year: '2000' } }
+      before { post '/games', params: { year: '2000' }.to_json, headers: headers }
 
       it 'returns code status 422' do
         expect(response).to have_http_status(422)
@@ -79,9 +81,9 @@ RSpec.describe 'Games API', type: :request do
   end
 
   describe 'PUT /games/:id' do
-    let(:valid_attributes) { { title: 'World of Warcraft' } }
+    let(:valid_attributes) { { title: 'World of Warcraft' }.to_json }
 
-    before { put "/games/#{game_id}", params: valid_attributes }
+    before { put "/games/#{game_id}", params: valid_attributes, headers: headers }
 
     context 'when the record exists' do
       it 'updates the record' do
@@ -107,7 +109,7 @@ RSpec.describe 'Games API', type: :request do
   end
 
   describe 'DELETE /games/:id' do
-    before { delete "/games/#{game_id}" }
+    before { delete "/games/#{game_id}", headers: headers }
 
     context 'when the record exists' do
       it 'returns code status 204' do
