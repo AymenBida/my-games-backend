@@ -38,4 +38,8 @@ class Message
   def self.no_favourites
     'No favourite games found'
   end
+
+  def self.favourite_not_found
+    "Couldn't find Favourite"
+  end
 end

@@ -4,8 +4,8 @@ class GamesController < ApplicationController
   skip_before_action :authorize_request, only: %i[index show]
 
   def index
-    @games = Game.all
-    json_response(@games)
+    games = Game.all
+    json_response(games)
   end
 
   def show

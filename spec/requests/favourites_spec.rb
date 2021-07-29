@@ -62,4 +62,27 @@ RSpec.describe 'Favourites API', type: :request do
       end
     end
   end
+
+  describe 'DELETE /favourites/:id' do
+    let!(:favourite) { Favourite.create(user_id: user.id, game_id: game_id) }
+    before { delete "/favourites/#{game_id}", headers: headers }
+
+    context 'when the record exists' do
+      it 'returns code status 204' do
+        expect(response).to have_http_status(204)
+      end
+    end
+
+    context 'when the record does not exist' do
+      let(:game_id) { 0 }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+
+      it 'returns a not found message' do
+        expect(response.body).to match(/Couldn't find Favourite/)
+      end
+    end
+  end
 end
