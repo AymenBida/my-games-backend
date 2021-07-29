@@ -34,4 +34,8 @@ class Message
   def self.favourite_created
     'Game successfully added to favourites'
   end
+
+  def self.no_favourites
+    'No favourite games found'
+  end
 end

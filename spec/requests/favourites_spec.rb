@@ -33,4 +33,33 @@ RSpec.describe 'Favourites API', type: :request do
       end
     end
   end
+
+  describe 'GET /favourites' do
+    context 'when user is logged in' do
+      context 'when user have favourites' do
+        let!(:favourite) { Favourite.create(user_id: user.id, game_id: game_id) }
+        before { get '/favourites', headers: headers }
+
+        it 'returns the user favourites array' do
+          expect(json.size).to eq(1)
+        end
+
+        it 'returns status code 200' do
+          expect(response).to have_http_status(200)
+        end
+      end
+
+      context 'when user does not have favourites' do
+        before { get '/favourites', headers: headers }
+
+        it 'returns a message saying no favourites' do
+          expect(json['message']).to match(/No favourite games found/)
+        end
+
+        it 'returns status code 200' do
+          expect(response).to have_http_status(200)
+        end
+      end
+    end
+  end
 end
