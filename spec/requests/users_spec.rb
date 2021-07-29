@@ -6,21 +6,21 @@ RSpec.describe 'Users API', type: :request do
     {
       name: 'Aymen',
       email: 'aymen@bida.com',
-      password_digest: '123456'
+      password: '123456'
     }
   end
   let(:invalid_attributes) do
     {
       name: nil,
       email: 'bla@bla.com',
-      password_digest: '123'
+      password: '123'
     }
   end
   let(:existing_user_attributes) do
     {
       name: 'anything',
       email: 'username@domain.com',
-      password_digest: '1234'
+      password: '1234'
     }
   end
 
@@ -29,11 +29,15 @@ RSpec.describe 'Users API', type: :request do
       before { post '/signup', params: valid_attributes }
 
       it 'creates a user' do
-        expect(json['name']).to eq('Aymen')
+        expect(response).to have_http_status(201)
       end
 
-      it 'returns status code 201' do
-        expect(response).to have_http_status(201)
+      it 'returns a success message' do
+        expect(json['message']).to match(/Account created successfully/)
+      end
+
+      it 'returns an authentication token' do
+        expect(json['auth_token']).not_to be_nil
       end
     end
 
