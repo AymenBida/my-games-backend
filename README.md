@@ -22,9 +22,11 @@ To get a local copy up and running follow these simple example steps:
 - Migrate the database `rails db:migrate`
 - Populate the database `rails db:seed`
 
-### Run tests
+## Tests
 
-- Run `rails s` or `rails server`
+To run all the tests use this command in the root folder:
+
+- `rspec`
 
 ### :hammer: Built With
 
