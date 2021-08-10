@@ -2,7 +2,7 @@
 
 Rails API for showing games with JWT Authentication
 
-## Prerequisties
+## Prerequisites
 
 - Ruby 2.7.2
 - Ruby on Rails 6.1.1
@@ -18,17 +18,18 @@ To get a local copy up and running follow these simple example steps:
 ### Install
 
 - Run `bundle install`
-- Create the database `rails db:create` 
+- Create the database `rails db:create`
 - Migrate the database `rails db:migrate`
+- Populate the database `rails db:seed`
 
 ### Run tests
 
 - Run `rails s` or `rails server`
-    
+
 ### :hammer: Built With
 
-* Ruby
-* Rails
+- Ruby
+- Rails
 
 ## Author
 
