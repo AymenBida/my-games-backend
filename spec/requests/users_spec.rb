@@ -24,9 +24,9 @@ RSpec.describe 'Users API', type: :request do
     }
   end
 
-  describe 'POST /signup' do
+  describe 'POST /users' do
     context 'when attributes are valid' do
-      before { post '/signup', params: valid_attributes }
+      before { post '/users', params: valid_attributes }
 
       it 'creates a user' do
         expect(response).to have_http_status(201)
@@ -42,7 +42,7 @@ RSpec.describe 'Users API', type: :request do
     end
 
     context 'when attributes are not valid' do
-      before { post '/signup', params: invalid_attributes }
+      before { post '/users', params: invalid_attributes }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -56,7 +56,7 @@ RSpec.describe 'Users API', type: :request do
     context 'when user already exists' do
       before do
         user
-        post '/signup', params: existing_user_attributes
+        post '/users', params: existing_user_attributes
       end
 
       it 'returns status code 422' do
