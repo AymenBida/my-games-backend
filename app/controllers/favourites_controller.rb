@@ -1,6 +1,6 @@
 class FavouritesController < ApplicationController
   def create
-    Favourite.create!(user_id: current_user.id, game_id: fav_params[:game_id])
+    current_user.favourites.create!(fav_params)
     response = { message: Message.favourite_created }
     json_response(response, :created)
   end
