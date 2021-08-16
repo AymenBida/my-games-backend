@@ -14,7 +14,8 @@ class FavouritesController < ApplicationController
   end
 
   def destroy
-    favourite = Favourite.to_delete(current_user.id, fav_params[:id]).first
+    favourite = current_user.favourites.find_by(game_id: fav_params[:id])
+
     unless favourite
       response = { message: Message.favourite_not_found }
       json_response(response, :not_found)
