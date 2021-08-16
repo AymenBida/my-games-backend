@@ -1,8 +1,8 @@
-# Title
+# Bida Games API
 
-Description
+Rails API for showing games with JWT Authentication
 
-## Prerequisties
+## Prerequisites
 
 - Ruby 2.7.2
 - Ruby on Rails 6.1.1
@@ -12,23 +12,26 @@ Description
 To get a local copy up and running follow these simple example steps:
 
 - Open your terminal
-- Clone this project into the directory of your choice `git clone https://github.com/AymenBida/<repo>.git`
-- Go to the project folder `cd <repo>`
+- Clone this project into the directory of your choice `git clone https://github.com/AymenBida/my-games-backend.git`
+- Go to the project folder `cd my-games-backend`
 
 ### Install
 
 - Run `bundle install`
-- Create the database `rails db:create` 
+- Create the database `rails db:create`
 - Migrate the database `rails db:migrate`
+- Populate the database `rails db:seed`
 
-### Run tests
+## Tests
 
-- Run `rails s` or `rails server`
-    
+To run all the tests use this command in the root folder:
+
+- `rspec`
+
 ### :hammer: Built With
 
-* Ruby
-* Rails
+- Ruby
+- Rails
 
 ## Author
 
@@ -42,7 +45,7 @@ To get a local copy up and running follow these simple example steps:
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/AymenBida/<repo>/issues)
+Feel free to check the [issues page](https://github.com/AymenBida/my-games-backend/issues)
 
 ## 📝 License
 
